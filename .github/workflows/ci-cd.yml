@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+            - name: Debug secret length
+        run: |
+          echo "Username length: ${#DOCKER_USERNAME}"
+          echo "Token length: ${#DOCKER_TOKEN}"
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag my-app:latest
